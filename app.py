@@ -189,7 +189,13 @@ def main():
         ncol = st.selectbox("表示列数", [1,2,3,4,5,6], index=2)
 
     max_datetime = pd.to_datetime(x.datetime.max()).tz_convert("Asia/Tokyo").strftime("%Y/%m/%d %H:%M:%S")
-    st.text(f"Data as of: {max_datetime}")
+    cols = st.columns(5)
+    with cols[0]:
+        st.text(f"Data as of: {max_datetime}")
+    with cols[1]:
+        obj = x[~x.hasreference].dropna(subset=["score", "scoremax", "qnumber", "trycount"]).to_csv(index=False).encode("utf8")
+        st.download_button("Download data", obj, file_name="mondoquiz-app.csv", mime="text/csv")
+
     fig = make_histograms(x, maxq=maxq, trial=trial, nrow=nrow, ncol=ncol, username=username,
                           include_maxscore=include_maxscore, show_percent=show_percent)
     st.pyplot(fig)
