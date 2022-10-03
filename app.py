@@ -134,7 +134,7 @@ def make_histograms(df: pd.DataFrame,
             else:
                 if len(tmp2) > 1:
                     logger.warning("Multiple rows  of the same user '%s':\n%s", username, tmp2)
-                    tmp2 = tmp2.head(0)
+                    tmp2 = tmp2.sort_values("score").head(0)  # we take the smallest score
 
                 userscore = tmp2.score.item()
                 userposition = (tmp.score >= userscore).mean()
