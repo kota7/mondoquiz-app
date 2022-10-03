@@ -125,7 +125,7 @@ def make_histograms(df: pd.DataFrame,
         #a.bar(bars.score, bars.size)
         a.grid(linestyle="dotted")
         a.hist(tmp.score, bins=30, edgecolor="#dddddd")
-        a.set_title(f"{q} (max:{maxscore}) | 平均={tmp.score.mean():.1f}, 中央値={tmp.score.median():.1f}")
+        a.set_title(f"{q} (満点:{maxscore}) | 平均={tmp.score.mean():.1f}, 中央値={tmp.score.median():.1f}")
 
         if username != "":
             tmp2 = tmp[tmp.username==username]
@@ -169,7 +169,7 @@ def main():
 
     cols = st.columns(6)
     with cols[0]:
-        username = st.text_input("ユーザー名")
+        username = st.text_input("ユーザー名", placeholder="Twitter ユーザー名")
     with cols[1]:
         # find the most frequent date
         tmp = x[["qnumber", "datetime"]].dropna().copy()
@@ -193,6 +193,9 @@ def main():
     fig = make_histograms(x, maxq=maxq, trial=trial, nrow=nrow, ncol=ncol, username=username,
                           include_maxscore=include_maxscore, show_percent=show_percent)
     st.pyplot(fig)
+    st.markdown("---")
+    st.markdown("Copyright&nbsp;&copy;Kota Mori &nbsp; | &nbsp; View the source at [GitHub](https://github.com/kota7/mondoquiz-app).",
+                unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
