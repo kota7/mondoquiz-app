@@ -88,6 +88,7 @@ def make_histograms(df: pd.DataFrame,
     df.score = df.score.astype(int)
     df.scoremax = df.scoremax.astype(int)
     if show_percent:
+        df.score_orig = df.score
         df.score = (100.0 * df.score / df.scoremax)
         df.scoremax = 100
 
@@ -124,7 +125,13 @@ def make_histograms(df: pd.DataFrame,
         #print(bars.score, bars.size)
         #a.bar(bars.score, bars.size)
         a.grid(linestyle="dotted")
-        a.hist(tmp.score, bins=30, edgecolor="#dddddd")
+        # calculate appropriate bins
+        if show_percent:
+            s = tmp.score_orig
+        else:
+            s = tmp.score
+        bins = (s.max() - s.min() + 1)        
+        a.hist(tmp.score, bins=bins, edgecolor="#dddddd")
         a.set_title(f"{q} (満点:{maxscore}) | 平均={tmp.score.mean():.1f}, 中央値={tmp.score.median():.1f}")
 
         if username != "":
