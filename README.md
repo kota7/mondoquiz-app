@@ -1,5 +1,5 @@
 # mondoquiz-app
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://kota7-mondoquiz-app-app-xk3qdp.streamlitapp.com/)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://kota7-mondoquiz-app-app-xk3qdp.streamlitapp.com)
 
 
 Visualize the score distribution of Quiz Mondo (https://mondo.quizknock.com/).
