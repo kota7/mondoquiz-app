@@ -88,7 +88,7 @@ def make_histograms(df: pd.DataFrame,
     df.score = df.score.astype(int)
     df.scoremax = df.scoremax.astype(int)
     if show_percent:
-        df.score_orig = df.score
+        df["score_orig"] = df.score  # keep original scale for computing bins below
         df.score = (100.0 * df.score / df.scoremax)
         df.scoremax = 100
 
