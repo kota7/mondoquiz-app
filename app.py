@@ -42,10 +42,11 @@ def update_datafile():
     client = storage.Client.from_service_account_info(st.secrets["gcp_service_account"])
     bucket = client.bucket(st.secrets["gcp_bucket"])
 
-
     if os.path.isfile(LOCAL_CSVFILE):
-        # compare the md5 hash of the current file against the value in the remote
-        # download the file only if they are different
+        # Compare the md5 hash of the current file against the value in the remote
+        # Download the file only if they are different
+        # This way we avoid downloading the same files again
+        # ToDO. Are there better way of doing this?
         local_md5 = _get_md5(LOCAL_CSVFILE)
         md5 = bucket.blob(st.secrets["md5filename"]).download_as_string().decode("utf8")
         logger.info("'%s' vs '%s'", local_md5, md5)
