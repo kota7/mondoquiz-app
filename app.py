@@ -136,7 +136,7 @@ def make_histograms(df: pd.DataFrame,
         a.set_title(f"{q} (満点:{maxscore}) | 平均={tmp.score.mean():.1f}, 中央値={tmp.score.median():.1f}")
 
         if username != "":
-            tmp2 = tmp[tmp.username==username]
+            tmp2 = tmp[tmp.username.str.lower()==username.lower()]
             if len(tmp2) == 0:
                 logger.info("User '%s' not found in qnumber %s", username, q)
             else:
